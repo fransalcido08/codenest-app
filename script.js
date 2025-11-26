@@ -283,19 +283,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Modal de descarga
+    // Modal de descarga - ACTUALIZADO PARA DESCARGA DIRECTA
     const initDownloadModal = function() {
         const downloadBtn = document.getElementById('download-btn');
         const modal = document.getElementById('downloadModal');
         const closeModal = document.querySelector('.close-modal');
+        const modalDownloadBtn = document.querySelector('.download-option .btn-primary');
         
         if (!downloadBtn || !modal) return;
         
+        // Botón principal - abre modal
         downloadBtn.addEventListener('click', function(e) {
             e.preventDefault();
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
+        
+        // Botón dentro del modal - descarga directa
+        if (modalDownloadBtn) {
+            modalDownloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Iniciar descarga automáticamente
+                console.log('🚀 Iniciando descarga del APK...');
+                
+                // Crear enlace temporal para descarga
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'CodeNest.apk';
+                downloadLink.download = 'CodeNest.apk';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // Cerrar modal después de iniciar descarga
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                    alert('¡Descarga iniciada! El archivo CodeNest.apk se está descargando.');
+                }, 500);
+            });
+        }
         
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
