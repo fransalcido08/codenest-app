@@ -75,8 +75,8 @@ header .container {
 }
 
 .logo-image {
-    width: 75px;
-    height: 75px;
+    width: 165px;
+    height: 165px;
     object-fit: contain;
     border-radius: 8px;
 }
